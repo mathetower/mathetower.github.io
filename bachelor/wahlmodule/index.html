@@ -91,7 +91,7 @@ Sonstiges: bei mündlichen Prüfungen/Präsentationen kurze Worte zu Dozenten (s
 
 <!-- Button to unfold/fold all sections -->
 <div class="w3-center">
-  <button id="toggleAllButton" class="w3-button w3-blue" onclick="toggleAllSections()">Unfold All</button>
+  <button id="toggleAllButton" class="w3-button w3-blue" onclick="toggleAllSections()">alles ausklappen</button>
 </div>
 
 	  
@@ -397,8 +397,26 @@ Sonstiges: bei mündlichen Prüfungen/Präsentationen kurze Worte zu Dozenten (s
       arrow.classList.remove('open'); // Reset arrow
     }
   }
-</script>
 
+  function toggleAllSections() {
+    var contents = document.querySelectorAll('.accordion-content');
+    var arrows = document.querySelectorAll('.arrow');
+    var toggleButton = document.getElementById('toggleAllButton');
+    var isAnyClosed = Array.from(contents).some(content => content.style.display === "none" || content.style.display === "");
+
+    if (isAnyClosed) {
+      // Unfold all sections
+      contents.forEach(content => content.style.display = "block");
+      arrows.forEach(arrow => arrow.classList.add('open'));
+      toggleButton.textContent = 'alles einklappen';
+    } else {
+      // Fold all sections
+      contents.forEach(content => content.style.display = "none");
+      arrows.forEach(arrow => arrow.classList.remove('open'));
+      toggleButton.textContent = 'alles ausklappen';
+    }
+  }
+</script>
 
 <div id="2"></div>	
 <!-- Accordion for BWL-Sommersemester -->
