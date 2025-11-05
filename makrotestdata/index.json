@@ -1,0 +1,314 @@
+[
+  {
+    "id": "Q.DE.Y.G.0108.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Inländische Verwendung / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0108.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0103.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Private Konsumausgaben / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0103.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0110.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Exporte von Waren und Dienstleistungen / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0110.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.I.IP1.A",
+    "flow": "BBK_ITS",
+    "label": "<!DOCTYPE html>",
+    "file": "clean/BBK_ITS_Q.DE.Y.I.IP1.A.csv"
+  },
+  {
+    "id": "Q.EA19.Y.I.IP1.A",
+    "flow": "BBK_ITS",
+    "label": "<!DOCTYPE html>",
+    "file": "clean/BBK_ITS_Q.EA19.Y.I.IP1.A.csv"
+  },
+  {
+    "id": "Q.FR.Y.I.IP1.A",
+    "flow": "BBK_ITS",
+    "label": "<!DOCTYPE html>",
+    "file": "clean/BBK_ITS_Q.FR.Y.I.IP1.A.csv"
+  },
+  {
+    "id": "Q.IT.Y.I.IP1.A",
+    "flow": "BBK_ITS",
+    "label": "<!DOCTYPE html>",
+    "file": "clean/BBK_ITS_Q.IT.Y.I.IP1.A.csv"
+  },
+  {
+    "id": "Q.ES.Y.I.IP1.A",
+    "flow": "BBK_ITS",
+    "label": "<!DOCTYPE html>",
+    "file": "clean/BBK_ITS_Q.ES.Y.I.IP1.A.csv"
+  },
+  {
+    "id": "Q.I9.Y.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Euroraum-20 / Index / kalender- und saisonbereinigt",
+    "file": "clean/BBXN1_Q.I9.Y.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.DE.N.H.0000.L",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Gesamtwirtschaftliche Übersicht / Bruttoinlandsprodukt -preisbereinigt- 1) 2) 3)",
+    "file": "clean/BBNZ1_Q.DE.N.H.0000.L.csv"
+  },
+  {
+    "id": "Q.EE.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Estland / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.EE.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.BE.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Belgien / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.BE.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.FI.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Finnland / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.FI.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.FR.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Frankreich / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.FR.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.GR.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Griechenland / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.GR.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.HR.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Kroatien / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.HR.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.IE.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Irland / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.IE.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.IT.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Italien / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.IT.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.LV.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Lettland / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.LV.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.LT.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Litauen / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.LT.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.LU.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Luxemburg / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.LU.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.MT.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Malta / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.MT.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.NL.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Niederlande / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.NL.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.AT.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Österreich / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.AT.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.PT.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Portugal / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.PT.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.SK.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Slowakei / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.SK.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.SI.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Slowenien / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.SI.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.ES.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Spanien / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.ES.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.CY.N.NAG.B1QG00.0000.Z0N.IND.I00",
+    "flow": "BBXN1",
+    "label": "Volkswirtschaftliche Gesamtrechnung - Bruttoinlandsprodukt (BIP) / Zypern / Index / Ursprungswerte",
+    "file": "clean/BBXN1_Q.CY.N.NAG.B1QG00.0000.Z0N.IND.I00.csv"
+  },
+  {
+    "id": "Q.DE.S.G.0106.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Konsumausgaben des Staates / In jeweiligen Preisen / nur saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.S.G.0106.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0152.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Ausrüstungsinvestitionen in der Gesamtwirtschaft / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0152.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0155.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen in der Gesamtwirtschaft / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0155.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0161.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Vorratsveränderungen u. Nettozug. an Wertsachen -Gesamtwirtsch.- / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0161.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0112.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Außenbeitrag / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0112.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0111.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Importe von Waren und Dienstleistungen / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0111.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0151.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bruttoanlageinvestitionen in der Gesamtwirtschaft / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0151.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0156.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen: Wohnbauten in der Gesamtwirtschaft / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0156.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0157.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen: Nichtwohnbauten in der Gesamtwirtschaft / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0157.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0158.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Sonstige Anlagen in der Gesamtwirtschaft / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0158.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0165.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bruttoanlageinvestitionen des Staates / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0165.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0166.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Ausrüstungsinvestitionen des Staates / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0166.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0167.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen des Staates / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0167.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0168.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen: Wohnbauten des Staates / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0168.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0169.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen: Nichtwohnbauten des Staates / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0169.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0170.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Sonstige Anlagen des Staates / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0170.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0172.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bruttoanlageinvestitionen der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0172.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0173.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Ausrüstungsinvestitionen der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0173.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0174.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0174.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0175.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen: Wohnbauten der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0175.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0176.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Bauinvestitionen: Nichtwohnbauten der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0176.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0177.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Sonstige Anlagen der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0177.A.csv"
+  },
+  {
+    "id": "Q.DE.Y.G.0178.A",
+    "flow": "BBNZ1",
+    "label": "Deutschland / Verwendung des Bruttoinlandsprodukts / Gewerbliche Bruttoanlageinvestitionen der Kapitalgesellschaften und privaten Haushalte / In jeweiligen Preisen / kalender- und saisonbereinigt",
+    "file": "clean/BBNZ1_Q.DE.Y.G.0178.A.csv"
+  }
+]
