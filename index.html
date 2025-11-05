@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bundesbank Time Series Data</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    select {
+      width: 100%;
+      margin: 10px 0;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    #dataInfo {
+      margin: 10px 0;
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 4px;
+    }
+    #sourceInfo {
+      font-size: 90%;
+      color: #444;
+      margin: 20px 0;
+      padding: 10px;
+      background: #f9f9f9;
+      border-left: 3px solid #007bff;
+    }
+    label {
+      margin-right: 15px;
+    }
+    .options-section {
+      margin: 15px 0;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bundesbank Time Series Data</h1>
+  <p>Select a BIP or Verwendung variable to view and plot its data.</p>
+  
+  <p>
+    <label>
+      <input id="adjustedOnly" type="checkbox"> 
+      Show only seasonally adjusted series
+    </label>
+  </p>
+
+  <h2>BIP (GDP) (real, seasonally adjusted)</h2>
+  <select id="bipSelect" multiple size="5"></select>
+
+  <h2>Verwendung des BIP (nominal, seasonally adjusted)</h2>
+  <select id="verwendungSelect" multiple size="10"></select>
+
+  <div id="bipOptions" class="options-section" style="display: none;">
+    <label>
+      <input id="logCheck" type="checkbox"> Log scale
+    </label>
+    <label>
+      Index to 100 at year: 
+      <input id="baseYear" type="number" value="1995" style="width: 80px;">
+    </label>
+  </div>
+
+  <div id="verwendungOptions" class="options-section" style="display: none;">
+    <label>
+      <input checked name="verwScale" type="radio" value="level"> Level
+    </label>
+    <label>
+      <input name="verwScale" type="radio" value="log"> Log
+    </label>
+    <label>
+      <input id="percentCheck" type="checkbox"> Als Prozent des BIP
+    </label>
+  </div>
+
+  <p>
+    <button onclick="loadData()">Load Data</button>
+    <button onclick="plotData()">Plot</button>
+    <button onclick="clearPlot()">Clear Plot</button>
+  </p>
+
+  <div id="dataInfo">Ready to load data...</div>
+
+  <div id="sourceInfo"></div>
+
+  <div style="margin-top: 20px;">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <script>
+    let currentData = null;
+    let indexList = [];
+    let chart = null;
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    function updateOptions() {
+      const bipSel = document.getElementById('bipSelect');
+      const verwSel = document.getElementById('verwendungSelect');
+      
+      if (bipSel.selectedOptions.length > 0) {
+        // Clear Verwendung selections
+        Array.from(verwSel.options).forEach(opt => opt.selected = false);
+        document.getElementById('bipOptions').style.display = 'block';
+        document.getElementById('verwendungOptions').style.display = 'none';
+      } else if (verwSel.selectedOptions.length > 0) {
+        // Clear BIP selections
+        Array.from(bipSel.options).forEach(opt => opt.selected = false);
+        document.getElementById('bipOptions').style.display = 'none';
+        document.getElementById('verwendungOptions').style.display = 'block';
+      } else {
+        document.getElementById('bipOptions').style.display = 'none';
+        document.getElementById('verwendungOptions').style.display = 'none';
+      }
+      renderSourceInfo();
+    }
+
+    async function loadIndex() {
+      try {
+        const r = await fetch('index.json');
+        const idx = await r.json();
+        indexList = idx;
+        
+        const bipSel = document.getElementById('bipSelect');
+        const verwSel = document.getElementById('verwendungSelect');
+        bipSel.innerHTML = '';
+        verwSel.innerHTML = '';
+        
+        const adjustedOnly = document.getElementById('adjustedOnly').checked;
+        
+        idx.forEach(item => {
+          if (adjustedOnly && !item.label.includes('saisonbereinigt')) return;
+          
+          const opt = document.createElement('option');
+          opt.value = item.file.replace('clean/', '');
+          let text = item.label || item.id;
+          
+          if (item.flow === 'BBXN1') {
+            const match = text.match(/\/ ([^\/]+) \//);
+            if (match) text = 'BIP ' + match[1];
+          } else if (item.flow === 'BBNZ1' && item.id.startsWith('Q.DE.Y.G.')) {
+            const shortLabels = {
+              'Q.DE.Y.G.0108.A': 'Inländische Verwendung',
+              'Q.DE.Y.G.0103.A': 'Private Konsumausgaben',
+              'Q.DE.S.G.0106.A': 'Staatskonsum',
+              'Q.DE.Y.G.0152.A': 'Ausrüstungsinvestitionen',
+              'Q.DE.Y.G.0155.A': 'Bauinvestitionen',
+              'Q.DE.Y.G.0161.A': 'Vorratsveränderungen',
+              'Q.DE.Y.G.0112.A': 'Außenbeitrag',
+              'Q.DE.Y.G.0110.A': 'Exporte',
+              'Q.DE.Y.G.0111.A': 'Importe',
+              'Q.DE.Y.G.0151.A': 'Bruttoanlageinvestitionen'
+            };
+            text = shortLabels[item.id] || text;
+          }
+          
+          text = text.replace(/-/g, ' ');
+          opt.text = text;
+          
+          if (item.id === 'Q.I9.Y.NAG.B1QG00.0000.Z0N.IND.I00' || 
+              item.id === 'Q.DE.N.H.0000.L') {
+            bipSel.appendChild(opt.cloneNode(true));
+          } else if (item.flow === 'BBNZ1' && item.id.startsWith('Q.DE.Y.G.')) {
+            verwSel.appendChild(opt.cloneNode(true));
+          }
+        });
+        
+        document.getElementById('dataInfo').innerText = 
+          `Loaded ${bipSel.options.length + verwSel.options.length} series`;
+        renderSourceInfo();
+      } catch (e) {
+        console.error('Failed to load index', e);
+        document.getElementById('dataInfo').innerText = 
+          'Failed to load index.json. Make sure you are serving files via HTTP (e.g., python -m http.server 8000)';
+      }
+    }
+
+    function renderSourceInfo() {
+      const src = document.getElementById('sourceInfo');
+      if (!src) return;
+      src.innerHTML = 'Data from Deutsche Bundesbank – Volkswirtschaftliche Gesamtrechnung. ' +
+        '<a href="https://www.bundesbank.de/dynamic/action/de/statistiken/zeitreihen-datenbanken/" target="_blank">Source</a>';
+    }
+
+    async function loadData() {
+      const bipSel = document.getElementById('bipSelect');
+      const verwSel = document.getElementById('verwendungSelect');
+      const selectedOptions = [...bipSel.selectedOptions, ...verwSel.selectedOptions];
+      
+      if (selectedOptions.length === 0) {
+        currentData = null;
+        document.getElementById('dataInfo').innerText = 'No series selected';
+        return;
+      }
+      
+      currentData = [];
+      
+      for (const opt of selectedOptions) {
+        const seriesFile = opt.value;
+        const name = opt.text;
+        const url = `clean/${seriesFile}`;
+        
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Network response was not ok');
+          const text = await response.text();
+          const lines = text.split('\n');
+          const data = [];
+          
+          let start = 0;
+          for (let i = 0; i < lines.length; i++) {
+            if (/^\d{4}(-Q[1-4])?[,;]/.test(lines[i]) || /^\d{4}[-]/.test(lines[i])) {
+              start = i;
+              break;
+            }
+          }
+          
+          for (let i = start; i < lines.length; i++) {
+            const parts = lines[i].replace(/;/g, ',').split(',');
+            if (parts.length >= 2) {
+              const date = parts[0].trim();
+              const rawVal = parts[1].trim();
+              if (rawVal === '') continue;
+              const value = parseFloat(rawVal.replace(',', '.'));
+              if (!isNaN(value)) data.push({ date, value });
+            }
+          }
+          
+          currentData.push({
+            name,
+            data,
+            type: opt.parentElement === bipSel ? 'bip' : 'verw'
+          });
+        } catch (error) {
+          console.error('Error loading', name, error);
+          document.getElementById('dataInfo').innerText += `\nError loading ${name}`;
+        }
+      }
+      
+      document.getElementById('dataInfo').innerText = 
+        `Loaded ${selectedOptions.length} series with ${currentData.reduce((sum, s) => sum + s.data.length, 0)} total data points`;
+    }
+
+    async function plotData() {
+      if (!currentData || currentData.length === 0) {
+        await loadData();
+        if (!currentData || currentData.length === 0) {
+          alert('No data loaded');
+          return;
+        }
+      }
+      
+      const log = document.getElementById('logCheck').checked;
+      const baseYear = parseInt(document.getElementById('baseYear').value);
+      const scale = document.querySelector('input[name="verwScale"]:checked').value;
+      const percent = document.getElementById('percentCheck').checked;
+      
+      // Get denominator for percentage calculation (first Verwendung series)
+      let denomMap = null;
+      let denomName = null;
+      if (percent) {
+        const verwSel = document.getElementById('verwendungSelect');
+        if (verwSel && verwSel.options.length > 0) {
+          const denomOpt = verwSel.options[0];
+          const denomFile = denomOpt.value;
+          denomName = denomOpt.text;
+          
+          // Check if already loaded
+          let denomSeriesInCurrent = currentData.find(s => s.name === denomName && s.type === 'verw');
+          let denomData = null;
+          
+          if (denomSeriesInCurrent) {
+            denomData = denomSeriesInCurrent.data;
+          } else {
+            // Fetch it
+            try {
+              const r = await fetch(`clean/${denomFile}`);
+              const text = await r.text();
+              const lines = text.split('\n');
+              let start = 0;
+              for (let i = 0; i < lines.length; i++) {
+                if (/^\d{4}(-Q[1-4])?[,;]/.test(lines[i]) || /^\d{4}[-]/.test(lines[i])) {
+                  start = i;
+                  break;
+                }
+              }
+              denomData = [];
+              for (let i = start; i < lines.length; i++) {
+                const parts = lines[i].replace(/;/g, ',').split(',');
+                if (parts.length >= 2) {
+                  const date = parts[0].trim();
+                  const rawVal = parts[1].trim();
+                  if (rawVal === '') continue;
+                  const value = parseFloat(rawVal.replace(',', '.'));
+                  if (!isNaN(value)) denomData.push({ date, value });
+                }
+              }
+            } catch (err) {
+              console.warn('Failed to fetch denominator', err);
+            }
+          }
+          
+          if (denomData && denomData.length > 0) {
+            denomMap = new Map(denomData.map(d => [d.date, d.value]));
+          }
+        }
+      }
+      
+      const allDates = new Set();
+      currentData.forEach(s => s.data.forEach(d => allDates.add(d.date)));
+      const labels = Array.from(allDates).sort();
+      
+      const datasets = [];
+      const colors = ['#007bff', '#dc3545', '#28a745', '#ffc107', '#6f42c1', 
+                      '#fd7e14', '#e83e8c', '#6c757d', '#17a2b8', '#20c997'];
+      
+      let yTitle = 'Value';
+      const isBip = currentData.some(s => s.type === 'bip');
+      
+      if (isBip) {
+        yTitle = log ? 'Log Index (100=' + baseYear + ')' : 'Index (100=' + baseYear + ')';
+      } else {
+        yTitle = scale === 'log' ? (percent ? 'Log % of BIP' : 'Log Value') : (percent ? '% of BIP' : 'Value');
+      }
+      
+      currentData.forEach((series, idx) => {
+        const dataMap = new Map(series.data.map(d => [d.date, d.value]));
+        
+        const chartData = labels.map(date => {
+          let v = dataMap.has(date) ? dataMap.get(date) : null;
+          if (v === null) return null;
+          
+          if (series.type === 'bip') {
+            let val = v;
+            const baseVal = series.data.find(d => d.date.startsWith(baseYear.toString()))?.value;
+            if (baseVal) {
+              if (log) {
+                val = Math.log(v) - Math.log(baseVal) + Math.log(100);
+              } else {
+                val = (v / baseVal) * 100;
+              }
+            }
+            return val;
+          } else {
+            // Verwendung
+            let val = v;
+            if (percent && denomMap) {
+              const denomVal = denomMap.get(date);
+              if (!denomVal) return null;
+              if (denomName && series.name === denomName) {
+                val = 100;
+              } else {
+                val = (v / denomVal) * 100;
+              }
+            }
+            if (scale === 'log') val = Math.log(val);
+            return val;
+          }
+        });
+        
+        datasets.push({
+          label: series.name,
+          data: chartData,
+          borderColor: colors[idx % colors.length],
+          backgroundColor: colors[idx % colors.length] + '20',
+          spanGaps: false,
+          fill: false,
+          tension: 0.1
+        });
+      });
+      
+      if (chart) chart.destroy();
+      
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            title: {
+              display: true,
+              text: currentData.map(s => s.name).join(', ').substring(0, 100),
+              font: { size: 14 }
+            },
+            legend: {
+              display: true,
+              position: 'bottom'
+            }
+          },
+          scales: {
+            x: {
+              title: { display: true, text: 'Date' }
+            },
+            y: {
+              title: { display: true, text: yTitle }
+            }
+          }
+        }
+      });
+    }
+
+    function clearPlot() {
+      if (chart) {
+        chart.destroy();
+        chart = null;
+      }
+      currentData = null;
+      document.getElementById('dataInfo').innerText = 'Plot cleared';
+    }
+
+    // Add event listener only for adjustedOnly checkbox
+    document.getElementById('adjustedOnly').addEventListener('change', loadIndex);
+
+    // Load index on page load
+    loadIndex();
+  </script>
+</body>
+</html>
