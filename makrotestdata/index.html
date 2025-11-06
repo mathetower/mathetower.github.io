@@ -58,10 +58,10 @@
   </p>
 
   <h2>BIP (GDP) (real, seasonally adjusted)</h2>
-  <select id="bipSelect" multiple size="5"></select>
+  <select id="bipSelect" multiple size="5" onchange="updateOptions('bip')"></select>
 
   <h2>Verwendung des BIP (nominal, seasonally adjusted)</h2>
-  <select id="verwendungSelect" multiple size="10"></select>
+  <select id="verwendungSelect" multiple size="10" onchange="updateOptions('verw')"></select>
 
   <div id="bipOptions" class="options-section" style="display: none;">
     <label>
@@ -105,21 +105,22 @@
     let chart = null;
     const ctx = document.getElementById('chart').getContext('2d');
 
-    function updateOptions() {
+    function updateOptions(source) {
       const bipSel = document.getElementById('bipSelect');
       const verwSel = document.getElementById('verwendungSelect');
       
-      if (bipSel.selectedOptions.length > 0) {
-        // Clear Verwendung selections
+      if (source === 'bip' && bipSel.selectedOptions.length > 0) {
+        // BIP was clicked and has selection - clear Verwendung
         Array.from(verwSel.options).forEach(opt => opt.selected = false);
         document.getElementById('bipOptions').style.display = 'block';
         document.getElementById('verwendungOptions').style.display = 'none';
-      } else if (verwSel.selectedOptions.length > 0) {
-        // Clear BIP selections
+      } else if (source === 'verw' && verwSel.selectedOptions.length > 0) {
+        // Verwendung was clicked and has selection - clear BIP
         Array.from(bipSel.options).forEach(opt => opt.selected = false);
         document.getElementById('bipOptions').style.display = 'none';
         document.getElementById('verwendungOptions').style.display = 'block';
-      } else {
+      } else if (bipSel.selectedOptions.length === 0 && verwSel.selectedOptions.length === 0) {
+        // Nothing selected
         document.getElementById('bipOptions').style.display = 'none';
         document.getElementById('verwendungOptions').style.display = 'none';
       }
@@ -355,6 +356,7 @@
           } else {
             // Verwendung
             let val = v;
+            if (scale === 'log') val = Math.log(val);
             if (percent && denomMap) {
               const denomVal = denomMap.get(date);
               if (!denomVal) return null;
@@ -363,8 +365,8 @@
               } else {
                 val = (v / denomVal) * 100;
               }
+              if (scale === 'log') val = Math.log(val);
             }
-            if (scale === 'log') val = Math.log(val);
             return val;
           }
         });
